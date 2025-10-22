@@ -1,4 +1,4 @@
-FROM r-base:4.5.0
+FROM r-base:4.5.1
 
 # Set compiler settings
 RUN mkdir $HOME/.R/
