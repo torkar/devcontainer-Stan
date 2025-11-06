@@ -60,13 +60,11 @@ WORKDIR /home/${USERNAME}
 ENV HOME=/home/${USERNAME} \
     PATH=/home/${USERNAME}/.local/bin:/home/${USERNAME}/.juliaup/bin:${PATH}
 
-# Configure R for user
+# Configure R for user and install cmdstan
 RUN mkdir -p ${HOME}/.R && \
     printf "CXX17FLAGS=-O3 -march=native -mtune=native -fPIC\nCXX17=g++\n" > ${HOME}/.R/Makevars && \
-    printf "options(mc.cores = ${MC_CORES})\nSys.setenv(MAKEFLAGS='${MAKEFLAGS}')\n" > ${HOME}/.Rprofile
-
-# Install cmdstan (user-level)
-RUN R -e "cmdstanr::install_cmdstan(cores = ${MC_CORES})"
+    printf "options(mc.cores = ${MC_CORES})\nSys.setenv(MAKEFLAGS='${MAKEFLAGS}')\n" > ${HOME}/.Rprofile && \
+    R -e "cmdstanr::install_cmdstan(cores = ${MC_CORES})"
 
 # Install and configure radian REPL
 RUN pipx install radian && \
