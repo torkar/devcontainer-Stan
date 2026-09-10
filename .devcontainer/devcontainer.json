@@ -1,5 +1,16 @@
 {
     "build": {
-        "dockerfile": "Dockerfile"
+      "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "REditorSupport.r"
+        ],
+        "settings": {
+          "r.plot.useHttpgd": true,
+          "r.sessionWatcher": true
+        }
+      }
     }
 }
